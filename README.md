@@ -115,7 +115,87 @@ console.log(sum)
 ## Övning 7
 
 Gör om ditt sten, sax och påse - spel så du använder funktioner och försöker återanvända kod.
+```javascript
+play();
+function play() {
+  let playerScore = 0;
+  let computerScore = 0;
+  let winningScore = 3;
 
+  while (playerScore < winningScore && computerScore < winningScore) {
+    let hand = getUserHand();
+    let compHand = generateRandom(1, 3);
+
+    if (hand.toUpperCase() === "STEN") {
+      if (compHand === 1) {
+        alert(
+          `Ni båda hade ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 2) {
+        playerScore++;
+        alert(
+          `Grymt player din ${hand} slog datorns Sax. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 3) {
+        computerScore++;
+        alert(
+          `Nahh! Datorns påse spöade din ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      }
+    } else if (hand.toUpperCase() === "Sax") {
+      if (compHand === 1) {
+        computerScore++;
+        alert(
+          `Nahh! Datorns påse spöade din ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 2) {
+        alert(
+          `Ni båda hade ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 3) {
+        playerScore++;
+        alert(
+          `Grymt player din ${hand} slog datorns Sax. Ställning är ${playerScore} - ${computerScore}`
+        );
+      }
+    } else if (hand.toUpperCase() === "Påse") {
+      if (compHand === 1) {
+        playerScore++;
+        alert(
+          `Grymt player din ${hand} slog datorns Sax. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 2) {
+        computerScore++;
+        alert(
+          `Nahh! Datorns påse spöade din ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      } else if (compHand === 3) {
+        alert(
+          `Ni båda hade ${hand}. Ställning är ${playerScore} - ${computerScore}`
+        );
+      }
+    }
+  }
+  gameOverState(playerScore, computerScore);
+}
+
+function getUserHand() {
+  let hand = prompt("Ange sten, sax eller påse!");
+  return hand;
+}
+
+function generateRandom(min, max) {
+  return Math.floor(Math.random() * max + min);
+}
+
+function gameOverState(pScore, cScore) {
+  if (pScore > cScore) {
+    alert(`Grattis player! Ställning är ${pScore} - ${cScore}`);
+  } else {
+    alert(`Skit! Ställning blev ${pScore} - ${cScore}`);
+  }
+}
+```
 ## Övning 8
 
 Gör om valfritt annat spel i Computational Thinking Games så att det använder sig av funktioner. Vilka delar av programmen kan man abstrahera till egna funktioner?
